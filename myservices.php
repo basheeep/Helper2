@@ -1,3 +1,15 @@
+<?php
+require_once 'includes/dbcall.php';
+$db = new Db();
+
+?>
+
+<?php
+$sql = "SELECT * FROM `ServiceReq`";
+$result = $db->query($sql);
+$numRows = $db->numRows($result);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,7 +73,7 @@
                  <!-- Start Navigation List -->
                 <ul class="nav navbar-nav">
                   <li>
-                    <a href="AcceptService.html">Request Service </a>
+                    <a href="AcceptService.html">Accept Service </a>
                   </li>
                   <li>
                     <a href="myservices.php">My Services </a> 
@@ -96,10 +108,10 @@
           <div class="row">         
             <div class="col-md-12">
               <div class="breadcrumb-wrapper">
-                <h2 class="product-title">Request Services</h2>
+                <h2 class="product-title">My Services</h2>
                 <ol class="breadcrumb">
                   <li><a href="#"><i class="ti-home"></i> Helper</a></li>
-                  <li class="current">Request Services</li>
+                  <li class="current">My Services</li>
                 </ol>
               </div>
             </div>
@@ -119,114 +131,47 @@
  <!-- Find Job Section Start -->
     <section class="find-job section" style="color: black">
       <div class="container">
-    
+        <h2 class="section-title">My Services</h2>
+        <div class="row">
           
-      <!-- Header Section End -->  
-<div class="row">
-                <!-- non breaking space to make the cousour look better!-->
-                <div>
-                    &nbsp;
+            
+               <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Service Type</th>
+                                <th>Status</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if ($numRows > 0): ?>
+                            <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                                <tr>
+                                    <td><?php echo $row['reqid']; ?></td>
+                                    <td><?php echo $row['date']; ?></td>
+                                    <td><?php echo $row['time']; ?></td>
+                                    <td><?php echo $row['type']; ?></td>
+                                    <td><?php echo $row['status']; ?></td>
+                                    <td><?php echo $row['notes']; ?></td>
+                                    <td>
+                                        
+                                        <a class="portfolio-link" data-toggle="modal" style="color: #ff6666;"onclick="editJobModal(<?php echo $row['jobID']; ?>);" href="#portfolioModal1">Edit</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                    <?php endif; ?>
+                        </tbody>
+                    </table>
+
                 </div>
-    
-    
 
             </div>
           <!-- Off Canvas Navigation -->
-          
-  
-	<div class="col-md-12">
-          <div class="container">
-	<div class="container">
-        <h4>Last Login: 05/10/2017 03:32 AM</h4>
-		<div class="row">
-			<div class="col-sm-12">
-                    
-<h2><i class="fa fa-address-card verybigtext" style="color: #ee113e;"></i>&ensp;Service History </h2>
-                    <br>
-                        <br>
-                    <div class="row hidden-xs " style="padding-top:10px; padding-bottom:10px; border-top: 0px;">
-				<div class="col-sm-2 hidden-xs ">
-					<span class="lefty marginright10 ">ID</span>
-				</div>
-				<div class="col-sm-4 hidden-xs ">
-					<span>Trainee</span>
-				</div>
-				<div class="col-sm-3 hidden-xs ">
-					<span>Session</span>
-				</div>
-				<div class="col-sm-3 hidden-xs">
-					<span>Date</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-2 marginTBL">
-					<span class="lefty marginright10 hidden-xs idcol">121212</span>
-				</div>
-				<div class="col-xs-6 col-sm-4">
-
-					<div class="row">
-						<i class="glyphicon glyphicon-user lefty hidden-xs "></i>
-						<span>Kelly Felder</span>
-						<span><small>Maid</small>&nbsp;
-							<div class="ratingstarcontainer" style="padding-left:0px;">
-								<i class="glyphicon glyphicon-star ratingstar"></i>
-								<i class="glyphicon glyphicon-star ratingstar"></i>
-								<i class="glyphicon glyphicon-star ratingstar"></i>
-								<i class="glyphicon glyphicon-star-empty ratingstar"></i>
-								<i class="glyphicon glyphicon-star-empty ratingstar"></i>
-							</div>
-						</span>
-					</div>
-
-				</div>
-				<div class="col-xs-6 col-sm-3 marginTBL">
-					<span>Cleaning</span><span class="label label-success" style="margin-left:5px;">RM30</span>
-				</div>
-				<div class="col-xs-6 col-sm-3 marginTBL">
-					<span>15 Oct, 8:56 <small class="transWord hidden-sm">2018</small></span>
-				</div>
-	
-			</div>
-		</div>
-		<div class="container marginTBL">
-			<form method="POST" action="requestService.html">
-				<h2>Your Review</h2>
-				<fieldset class="rating">
-    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-</fieldset>
-				<textarea rows="6" class="form-control" required></textarea>
-				<br><button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                <br><br>
-			</form>
-		</div>
-		<div class="container marginTBL" style="margin-bottom:30px;">
-			<h2>Notes</h2>
-			<blockquote style="font-size:13px;">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</blockquote>
-		</div>
-	</div>
-
-					
-
-				
-				</div>
-			</div>
-		</div>
-	</div>
-<br><br>
-                <div class="job-tag">
-                  
-                  </div>
-                
-        </section></section>
+              </div></div></div></div></section>
           <!-- Off Canvas Navigation -->
      	<!-- Footer Section Start -->
     <footer>
@@ -327,6 +272,6 @@
     <script type="text/javascript" src="assets/js/contact-form-script.js"></script>    
     <script type="text/javascript" src="assets/js/jquery.themepunch.revolution.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.themepunch.tools.min.js"></script>
-           </div>
+          </div></div>  
   </body>
 </html>

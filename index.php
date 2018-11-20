@@ -57,14 +57,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand logo" href="index.html"><img src="assets/img/logo.png" alt=""></a>
+                  <a class="navbar-brand logo" href="index.php"><img src="assets/img/logo.png" alt=""></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="navbar">              
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav">
                   <li>
-                    <a class="active" href="index.html">
+                    <a class="active" href="index.php">
                     Home
                     </a>
                     
@@ -90,7 +90,7 @@
             <!-- Mobile Menu Start -->
             <ul class="wpb-mobile-menu">
               <li>
-                <a class="active" href="index.html">Home</a>                       
+                <a class="active" href="index.php">Home</a>                       
               </li>
               <li>
                 <a href="about.html">About</a>
@@ -99,7 +99,7 @@
                 <li><a href="faq.html">FAQ</a></li>
               <li>
                 <li><a href="contact.html">Contact</a></li> 
-              <li class="btn-m"><a href="my-account.html"><i class="ti-lock"></i>  Log In</a></li>          
+              <li class="btn-m"><a href="signin.php"><i class="ti-lock"></i>  Log In</a></li>          
             </ul>
             <!-- Mobile Menu End --> 
           </nav>

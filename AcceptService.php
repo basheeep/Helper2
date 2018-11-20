@@ -1,3 +1,19 @@
+<?php  
+include "includes/dbconnection.php";
+
+$sql_user = "SELECT * FROM signup WHERE user_id='".$_SESSION['user_id']."'";
+
+
+//var_dump($_SESSION);
+$query_user = mysqli_query($dbCon,$sql_user);
+echo mysqli_error($dbCon);
+$user = mysqli_fetch_array($query_user);
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,7 +77,7 @@
                  <!-- Start Navigation List -->
                 <ul class="nav navbar-nav">
                   <li>
-                    <a href="AcceptService.html">Request Service </a>
+                    <a href="AcceptService.html">Accept Service </a>
                   </li>
                   <li>
                     <a href="myservices.php">My Services </a> 
@@ -96,10 +112,10 @@
           <div class="row">         
             <div class="col-md-12">
               <div class="breadcrumb-wrapper">
-                <h2 class="product-title">Request Services</h2>
+                <h2 class="product-title">Accept Services</h2>
                 <ol class="breadcrumb">
                   <li><a href="#"><i class="ti-home"></i> Helper</a></li>
-                  <li class="current">Request Services</li>
+                  <li class="current">Accept Services</li>
                 </ol>
               </div>
             </div>
@@ -119,115 +135,109 @@
  <!-- Find Job Section Start -->
     <section class="find-job section" style="color: black">
       <div class="container">
-    
-          
-      <!-- Header Section End -->  
-<div class="row">
-                <!-- non breaking space to make the cousour look better!-->
-                <div>
-                    &nbsp;
-                </div>
-    
-    
-
-            </div>
-          <!-- Off Canvas Navigation -->
-          
-  
-	<div class="col-md-12">
-          <div class="container">
-	<div class="container">
-        <h4>Last Login: 05/10/2017 03:32 AM</h4>
-		<div class="row">
-			<div class="col-sm-12">
-                    
-<h2><i class="fa fa-address-card verybigtext" style="color: #ee113e;"></i>&ensp;Service History </h2>
-                    <br>
-                        <br>
-                    <div class="row hidden-xs " style="padding-top:10px; padding-bottom:10px; border-top: 0px;">
-				<div class="col-sm-2 hidden-xs ">
-					<span class="lefty marginright10 ">ID</span>
-				</div>
-				<div class="col-sm-4 hidden-xs ">
-					<span>Trainee</span>
-				</div>
-				<div class="col-sm-3 hidden-xs ">
-					<span>Session</span>
-				</div>
-				<div class="col-sm-3 hidden-xs">
-					<span>Date</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-2 marginTBL">
-					<span class="lefty marginright10 hidden-xs idcol">121212</span>
-				</div>
-				<div class="col-xs-6 col-sm-4">
-
-					<div class="row">
-						<i class="glyphicon glyphicon-user lefty hidden-xs "></i>
-						<span>Kelly Felder</span>
-						<span><small>Maid</small>&nbsp;
-							<div class="ratingstarcontainer" style="padding-left:0px;">
-								<i class="glyphicon glyphicon-star ratingstar"></i>
-								<i class="glyphicon glyphicon-star ratingstar"></i>
-								<i class="glyphicon glyphicon-star ratingstar"></i>
-								<i class="glyphicon glyphicon-star-empty ratingstar"></i>
-								<i class="glyphicon glyphicon-star-empty ratingstar"></i>
-							</div>
-						</span>
-					</div>
-
-				</div>
-				<div class="col-xs-6 col-sm-3 marginTBL">
-					<span>Cleaning</span><span class="label label-success" style="margin-left:5px;">RM30</span>
-				</div>
-				<div class="col-xs-6 col-sm-3 marginTBL">
-					<span>15 Oct, 8:56 <small class="transWord hidden-sm">2018</small></span>
-				</div>
-	
-			</div>
-		</div>
-		<div class="container marginTBL">
-			<form method="POST" action="requestService.html">
-				<h2>Your Review</h2>
-				<fieldset class="rating">
-    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-</fieldset>
-				<textarea rows="6" class="form-control" required></textarea>
-				<br><button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                <br><br>
-			</form>
-		</div>
-		<div class="container marginTBL" style="margin-bottom:30px;">
-			<h2>Notes</h2>
-			<blockquote style="font-size:13px;">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</blockquote>
-		</div>
-	</div>
-
-					
-
-				
-				</div>
-			</div>
-		</div>
-	</div>
-<br><br>
+        <h2 class="section-title">Accept Services</h2>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="job-list">
+              <div class="thumb">
+                <a href="job-details.html"><img src="assets/img/jobs/img-1.jpg" alt=""></a>
+              </div>
+              <div class="job-list-content">
+                <h4><a href="job-details.html">Need a Fulltime Cook</a><span class="pending">Pending</span></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quaerat aut veniam molestiae atque dolorum omnis temporibus consequuntur saepe. Nemo atque consectetur saepe corporis odit in dicta reprehenderit, officiis, praesentium?</p>
                 <div class="job-tag">
-                  
+                  <div class="pull-left">
+                    <div class="meta-tag">
+                      <div class="meta-tag"><span><i class="ti-tag"></i></span>
+                      <span><i class="ti-info"></i>Nursing</span>
+                      <span><i class="ti-calendar"></i>2-18-11-03</span>
+                      <span><i class="ti-time"></i>1.00 PM</span>
+                    
+                    </div>
+                    </div>
                   </div>
-                
-        </section></section>
+                  <div class="pull-right">
+                    <div class="icon">
+                      <i class="ti-star"></i>
+                    </div>
+                    <a href="job-details.html" class="btn btn-common btn-rm">Accept</a>
+                      <a href="job-details.html" class="btn btn-common btn-rm">Reject</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="job-list">
+              <div class="thumb">
+                <a href="job-details.html"><img src="assets/img/jobs/img-2.jpg" alt=""></a>
+              </div>
+              <div class="job-list-content">
+                <h4><a href="job-details.html">Require Nanny/Nurse</a><span class="rejected">Rejected</span></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quaerat aut veniam molestiae atque dolorum omnis temporibus consequuntur saepe. rehenderit, officiis, praesentium?</p>
+                <div class="job-tag">
+                  <div class="pull-left">
+                    <div class="meta-tag"><span><i class="ti-tag"></i>1009</span>
+                      <span><i class="ti-info"></i>Nursing</span>
+                      <span><i class="ti-calendar"></i>2-18-11-03</span>
+                      <span><i class="ti-time"></i>1.00 PM</span>
+                    
+                    </div>
+                  </div>
+                  <div class="pull-right">
+                    <div class="icon">
+                      <i class="ti-shine"></i>
+                      </div>
+                    <a href="job-details.html" class="btn btn-common btn-rm">Rejected</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="job-list">
+              <div class="thumb">
+                <a href="job-details.html"><img src="assets/img/jobs/img-3.jpg" alt=""></a>
+              </div>
+              <div class="job-list-content">
+                <h4><a href="job-details.html">Part time Maid</a><span class="complete">Completed</span></h4>
+                <p>Looking for a part time maid to Clean the house thrice a week and to run some errands.
+Contact me on 01234567 if interested. Accept and call if confirmed</p>
+                <div class="job-tag">
+                  <div class="pull-left">
+                    <div class="meta-tag">
+                      <span><i class="ti-tag"></i>1008</span>
+                      <span><i class="ti-info"></i>Cleaning</span>
+                      <span><i class="ti-calendar"></i>2018-10-12</span>
+                      <span><i class="ti-time"></i>12.50 PM</span>
+                    </div>
+                  </div>
+                  <div class="pull-right">
+                    <div class="icon">
+                      <i class="ti-shine"></i>
+                    </div>
+                    <a href="job-details.html" class="btn btn-common btn-rm">Completed</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+                </div>
+              </div>
+            </div>
+          
+          <div class="col-md-12">
+            <div class="showing pull-left">
+              <a href="#">Showing <span>1-3</span> Of 3 Jobs</a>
+            </div>                    
+            <ul class="pagination pull-right">              
+              <li class="active"><a href="#" class="btn btn-common" ><i class="ti-angle-left"></i> prev</a></li>
+              <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+              <li class="active"><a href="#" class="btn btn-common">Next <i class="ti-angle-right"></i></a></li>
+            </ul>
+          </div>
+    </section>
+    <!-- Find Job Section End -->
           <!-- Off Canvas Navigation -->
+          </section>
+</div></section>
+
      	<!-- Footer Section Start -->
     <footer>
     	<!-- Footer Area Start -->
@@ -327,6 +337,6 @@
     <script type="text/javascript" src="assets/js/contact-form-script.js"></script>    
     <script type="text/javascript" src="assets/js/jquery.themepunch.revolution.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.themepunch.tools.min.js"></script>
-           </div>
+          </div></div>  
   </body>
 </html>

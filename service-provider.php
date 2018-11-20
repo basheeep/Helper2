@@ -1,9 +1,12 @@
-<?php session_start(); 
+<?php  
 include "includes/dbconnection.php";
 
-$sql_user = "SELECT * FROM users WHERE USER_ID='".$_SESSION['user_id']."'";
-$query_user = mysqli_query($dbCon,$sql_user);
+$sql_user = "SELECT * FROM signup WHERE user_id='".$_SESSION['user_id']."'";
 
+
+//var_dump($_SESSION);
+$query_user = mysqli_query($dbCon,$sql_user);
+echo mysqli_error($dbCon);
 $user = mysqli_fetch_array($query_user);
 
 
@@ -14,13 +17,13 @@ $user = mysqli_fetch_array($query_user);
 <!DOCTYPE html>
 <html lang="en">
   <head>
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="author" content="Jobboard">
     
-    <title>Helper- for the little things</title>    
+    
+    <title>Helper - Service Provider Profile</title>    
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png">
@@ -51,141 +54,114 @@ $user = mysqli_fetch_array($query_user);
     <!-- Color CSS Styles  -->
     <link rel="stylesheet" type="text/css" href="assets/css/colors/red.css" media="screen" />
     
-      <!-- Inline CSS Styles  -->
-<style>      
-p {
-    color :floralwhite;
-}
-</style>
-      
   </head>
 
   <body>  
       <!-- Header Section Start -->
       <div class="header">    
-        <!-- Start intro section -->
-        <section id="intro" class="section-intro">
-          <div class="logo-menu">
-            <nav class="navbar navbar-default" role="navigation" data-spy="affix" data-offset-top="50">
-              <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand logo" href="index.html"><img src="assets/img/logo.png" alt=""></a>
-                </div>
+        <div class="logo-menu">
+          <nav class="navbar navbar-default main-navigation" role="navigation" data-spy="affix" data-offset-top="50">
+            <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="index.html"><img src="assets/img/logo.png" alt=""></a>
+              </div>
 
-                <div class="collapse navbar-collapse" id="navbar">              
-                <!-- Start Navigation List -->
+              <div class="collapse navbar-collapse" id="navbar">              
+                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav">
                   <li>
-                    <a href="requestService.html">Request Service </a>
+                    <a href="AcceptService.php">Accept Service </a>
                   </li>
                   <li>
-                    <a href="faq.html">My Services </a> 
+                    <a href="myservices.php">My Services </a> 
                   </li>
                   
                 </ul>
                 <ul class="nav navbar-nav navbar-right float-right">
                     <li class="right"><a href="includes/logout.php"><i class="ti-user"></i> Sign Out</a></li>
                 </ul>
-              </div>                           
+              </div>
             </div>
             <!-- Mobile Menu Start -->
             <ul class="wpb-mobile-menu">
               <li>
-                <a class="active" href="requestService.html">Request Service</a>                       
+                <a href="AcceptService.php">Accept Service</a>                       
               </li>
               <li>
-                <a href="faq.html">My Services</a>
-              </li> 
-              <li class="btn-m"><a href="signin.html"><i class="ti-lock"></i>  Sign Out</a></li>          
+                <a href="myservices.php">My Services</a>
+              </li>
+              <li class="btn-m"><a href="includes/logout.php"><i class="ti-user"></i>  Sign Out</a></li>          
             </ul>
             <!-- Mobile Menu End --> 
           </nav>
 
           <!-- Off Canvas Navigation -->
           
-          
       <!-- Header Section End -->  
 
- <!-- Profile Section Start -->
+      <!-- Page Header Start -->
+      <div class="page-header" style="background: url(assets/img/banner1.jpg);">
+        <div class="container">
+          <div class="row">         
+            <div class="col-md-12">
+              <div class="breadcrumb-wrapper">
+                <h2 class="product-title">Service Provider Profile</h2>
+                <ol class="breadcrumb">
+                  <li><a href="#"><i class="ti-home"></i> Home</a></li>
+                  <li class="current">Service provider Profile</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page Header End --> 
+
+      <section class="section text-center" >
+      <div class="container">
+                <!-- Start Animations Text -->
+                <!-- Profile Section Start -->
     <section class="find-job section">
       <div class="container">
-          <div class="col-md-12">
+          <div class="col-md-6">
               <div class="job-list-content">
                 <!--content-->
 	<div class="container">
-        <h1>Service Provider Profile</h1>
-        <h4>Last Login: <?php echo $user['LAST_LOGIN']; ?></h4>
 		<div class="row">
 			<div class="col-sm-12">
 
 				<br>
-				<div class="righty marginleft10 hidden-xs col-sm-4 gallery">
-				</div>
-				<h2><i class="fa fa-user-circle verybigtext lefty marginright10" style="color: #ee113e;"></i>Hi <?php echo $user['FULLNAME']; ?> </h2>
+				
+				<h2><i class="fa fa-user-circle " style="color: #ee113e;" "margin-left:20px;"></i>Hi <?php echo $user['fullname']; ?> </h2>
 				<br><br>
-                <p><font size="4">Name  : <?php echo $user['FULLNAME']; ?></font></p>
-                <p><font size="4">Age   : 74 years</font></p>
-                <p><font size="4">D.O.B : 12/06/1944</font></p>
-                <p><font size="4">Hobbies   : Reading and Playing Chess</font></p>
-                <p><font size="4">Address      : 73A, Jalan Dunggun, Damansara Perdana</font></p>
+                <p><font size="4">Name  : <?php echo $user['fullname']; ?></font></p>
+                <p><font size="4">Email Address   : <?php echo $user['email']; ?></font></p>
+                <p><font size="4">Mobile Number : <?php echo $user['mobile']; ?></font></p>
+                <p><font size="4">Address      : Sea Street</font></p>
                 
 				<br><br>
 				<div class="row"><div class="righty marginleft10 hidden-xs col-sm-4 gallery">
 				</div>
-                    
-<h2><i class="fa fa-address-card verybigtext lefty marginright10" style="color: #ee113e;"></i>&ensp;Service History </h2>
-                    <br>
-                        <br>
-					<div class="col-xs-6 col-md-4">
-						<a class="col-xs-12 btn btn-default" href="#">
-							<span class="verybigtext">3</span>
-							<div class="smartlinebreak"></div>
-							Upcoming 
-							<br><br>
-						</a>
-						<div class="clear"></div><br>
-					</div>
-
-					<div class="col-xs-6 col-md-4">
-						<a class="col-xs-12 btn btn-default" href="#">
-							<span class="verybigtext">9</span>
-							<div class="smartlinebreak"></div>
-							Previous 
-							<br><br>
-						</a>
-						<div class="clear"></div><br>
-					</div>
-
-					<div class="col-xs-6 col-md-4">
-						<a class="col-xs-12 btn btn-default" href="#">
-							<span class="verybigtext">12</span>
-							<div class="smartlinebreak"></div>
-							Upcoming and Previous
-							<br><br>
-						</a>
-						<div class="clear"></div><br>
-					</div>
+                    <br><br>
+				<div class="row"><div class="righty marginleft10 hidden-xs col-sm-4 gallery">
 				</div>
-			</div>
-		</div>
-	</div>
-<br><br>
-                </div>
-              </div>
             </div>
-        </section>
-            </div>
-    </section>
-    <!-- Profile Section End -->
+                
+                <!-- End Animations Text -->
 
-    	<!-- Footer Section Start -->
+                <!-- Start Buttons -->
+                <a rel="nofollow" target="_blank" href="AcceptService.html" class="btn btn-common btn-large"><i class="fa fa-cart"></i> Accept Service Now</a>
+        </div>
+            </div></div></div></div></div></div></section>
+
+     	<!-- Footer Section Start -->
     <footer>
     	<!-- Footer Area Start -->
     	<section class="footer-Content">
@@ -230,6 +206,11 @@ p {
     	</section>
     	<!-- Footer area End -->
     	
+    	
+
+    </footer>
+    <!-- Footer Section End --> 
+    	
     	<!-- Copyright Start  -->
     	<div id="copyright">
     		<div class="container">
@@ -243,9 +224,9 @@ p {
     		</div>
     	</div>
     	<!-- Copyright End -->
-
+          </div></section></div></div>
     </footer>
-    <!-- Footer Section End -->   
+    <!-- Footer Section End -->  
       
       <!-- Go To Top Link -->
       <a href="#" class="back-to-top">
@@ -284,7 +265,6 @@ p {
     <script type="text/javascript" src="assets/js/contact-form-script.js"></script>    
     <script type="text/javascript" src="assets/js/jquery.themepunch.revolution.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.themepunch.tools.min.js"></script>
-      
-      </div>
+          
   </body>
 </html>

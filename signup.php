@@ -1,4 +1,5 @@
-<?php include "includes/signin.php"; ?>
+
+<?php  include "includes/signup.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en" >
@@ -40,7 +41,7 @@
 
     <!-- Color CSS Styles  -->
     <link rel="stylesheet" type="text/css" href="assets/css/colors/red.css" media="screen" />
-    
+        
    
 </head>
 
@@ -60,7 +61,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand logo" href="index.php"><img src="assets/img/logo.png" alt=""></a>
+                  <a class="navbar-brand logo" href="index.html"><img src="assets/img/logo.png" alt=""></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="navbar">              
@@ -81,16 +82,19 @@
                   <li>
                     <a href="contact.html">Contact</a>
                   </li>
+                  <li>
+                    <a href="blog.html">Blog </a>
+                  </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right float-right">
-                  <li class="right"><a href="signup.php"><i class="ti-user"></i>Sign Up</a></li>
+                  <li class="right"><a href="signin.php"><i class="ti-lock"></i>  Log In</a></li>
                 </ul>
               </div>                           
             </div>
             <!-- Mobile Menu Start -->
             <ul class="wpb-mobile-menu">
               <li>
-                <a class="active" href="index.php">Home</a>                       
+                <a class="active" href="index.html">Home</a>                       
               </li>
               <li>
                 <a href="about.html">About</a>
@@ -98,7 +102,10 @@
               <li>
                 <li><a href="faq.html">FAQ</a></li>
               <li>
-                <li><a href="contact.html">Contact</a></li> 
+                <li><a href="contact.html">Contact</a></li>
+              <li>
+                <a href="blog.html">Blog</a>
+              </li>  
               <li class="btn-m"><a href="signin.php"><i class="ti-lock"></i>  Log In</a></li>          
             </ul>
             <!-- Mobile Menu End --> 
@@ -106,70 +113,69 @@
       <!-- Header Section End -->  
 
           <!-- Off Canvas Navigation -->
- <div class="login-wrap">
+  <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">      
+  <div class="login-wrap">
 	<div class="login-html">
-		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Log In</label>
-		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
-
-    <div class="login-form">
-        
-
-        
-        
+		<input id="tab-1" type="radio" name="tab" class="sign-in" value="senior" checked><label for="tab-1" class="tab tab_no">Senior</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up" value="service-provider"><label for="tab-2" class="tab">Service Provider</label>
+		<div class="login-form">
 			<div class="sign-in-htm">
-      <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
-          
-                                    
-    <?php if (isset($_GET['msg'])&&$_GET['msg']!=''){
-    ?>
-        <div class="alert info" style="color: #000; background: #ff8080">
-        <?php echo $_GET['msg']; ?>
-        </div>
-        <?php
-    
-} ?>
-    
-          
 				<div class="group">
-      
-                    
-                    
-                    
-                    
 					<label for="user" class="label">Username</label>
-          <input id="user" type="text" class="input" name="username" value="<?php echo $username; ?>">
+					<input id="user" type="text" class="input" name="username" value="<?php echo $username; ?>">
           <span><?php echo $username_error; ?></span>
-          
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
-          <input id="pass" type="password" class="input" data-type="password" name="password">
+					<input id="pass" type="password" class="input" name="password">
           <span><?php echo $password_error; ?></span>
-				</div>
-				<div class="group">
-					<input id="check" type="checkbox" class="check" checked>
-					<label for="check"><span class="icon"></span> Keep me Signed in</label>
-				</div>
-				<div class="group">
-					<input type="submit" class="button" value="Sign In" name="submit">
-        </div>
-        <br/><br/>
-        
-        <span class="login-error"><?php echo $error_msg; ?></span>
-</form>  
 
-        <div class="hr"></div>
+				</div>
+				<div class="group">
+					<label for="pass" class="label">fullname</label>
+					<input id="fullname" type="text" class="input" name="name" value="<?php echo $name; ?>">
+          <span><?php echo $name_error; ?></span>
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Email Address</label>
+					<input id="email" type="text" class="input" name="email" value="<?php $email; ?>">
+          <span><?php echo $email_error; ?></span>
+				</div>
+                <div class="group">
+					<label for="number" class="label">Mobile No</label>
+					<input id="number" type="integer" class="input" name="mobile" value="<?php $phone; ?>">
+          <span><?php echo $phone_error; ?></span>
+				</div>
+                <div class="group">
+					<label for="address" class="label">Address</label>
+					<input id="address" type="text" class="input" name="address" value="<?php $address; ?>">
+          <span><?php echo $phone_error; ?></span>
+				</div>
+
+ <div class="group">
+ <label for="pass" class="label">User type</label><br/>
+        <input type="radio" value="senior" name="user_type"><label>Senior User</label>
+        <input type="radio" value="service-provider" name="user_type"><label>Service Provider</label>
+        <br/><br/>
+        </div>
+                
+				<div class="group">
+					<input type="submit" class="button" name="SignUp" value="Sign Up">
+				</div>
+				<div class="hr"></div>
 				<div class="foot-lnk">
-					<a href="#forgot">Forgot Password?</a>
+                    <label for="tab-1">Already Member?</label>
 				</div>
 			</div>
-			</div>
+
+
+    
 		</div>
-	</div>
-</div>
-  
-          </section>
+      </div>
+      </div>
+</form>
     </div>
+    
 
 </body>
 

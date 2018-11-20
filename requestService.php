@@ -1,3 +1,9 @@
+<?php
+require_once 'includes/dbcall.php';
+$db = new Db();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -128,105 +134,117 @@
                     &nbsp;
                 </div>
     
+    <?php
+        
+        if (isset($_POST['submit'])) {
+            
+            if ($_POST['title']!=""&&$_POST['jobtype']!=""&&$_POST['date']!=""&&$_POST['time']!=""&&$_POST['notes']!=""){
+
+                    $sql = "INSERT INTO `ServiceReq` (`type`, `title`,`jobtype`, `status`, `date`, `time`, `notes`)
+                                    VALUES ('type', '{$_POST['title']}','{$_POST['jobtype']}', 'Pending',  '{$_POST['date']}',
+                                      '{$_POST['time']}','{$_POST['notes']}')";
+
+                if (($db->query($sql))) {
+                    echo '<div class="alert alert-success" span style="color:#000" >
+                <strong>Success!</strong> Service Request Saved.
+            </div>';
+
+
+
+                }
+              //}
+            }
+
+
+          else {
+
+
+                  echo "<div class='row alert alert-success' >
+              <div class='col-lg-12'>Please fill out the mandatory fields.</div></div>";
+              }
+
+          }
+        ?>
     
 
             </div>
           <!-- Off Canvas Navigation -->
           
   
-	<div class="col-md-12">
-          <div class="container">
-	<div class="container">
-        <h4>Last Login: 05/10/2017 03:32 AM</h4>
-		<div class="row">
-			<div class="col-sm-12">
-                    
-<h2><i class="fa fa-address-card verybigtext" style="color: #ee113e;"></i>&ensp;Service History </h2>
-                    <br>
-                        <br>
-                    <div class="row hidden-xs " style="padding-top:10px; padding-bottom:10px; border-top: 0px;">
-				<div class="col-sm-2 hidden-xs ">
-					<span class="lefty marginright10 ">ID</span>
-				</div>
-				<div class="col-sm-4 hidden-xs ">
-					<span>Trainee</span>
-				</div>
-				<div class="col-sm-3 hidden-xs ">
-					<span>Session</span>
-				</div>
-				<div class="col-sm-3 hidden-xs">
-					<span>Date</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-2 marginTBL">
-					<span class="lefty marginright10 hidden-xs idcol">121212</span>
-				</div>
-				<div class="col-xs-6 col-sm-4">
-
-					<div class="row">
-						<i class="glyphicon glyphicon-user lefty hidden-xs "></i>
-						<span>Kelly Felder</span>
-						<span><small>Maid</small>&nbsp;
-							<div class="ratingstarcontainer" style="padding-left:0px;">
-								<i class="glyphicon glyphicon-star ratingstar"></i>
-								<i class="glyphicon glyphicon-star ratingstar"></i>
-								<i class="glyphicon glyphicon-star ratingstar"></i>
-								<i class="glyphicon glyphicon-star-empty ratingstar"></i>
-								<i class="glyphicon glyphicon-star-empty ratingstar"></i>
-							</div>
-						</span>
-					</div>
-
-				</div>
-				<div class="col-xs-6 col-sm-3 marginTBL">
-					<span>Cleaning</span><span class="label label-success" style="margin-left:5px;">RM30</span>
-				</div>
-				<div class="col-xs-6 col-sm-3 marginTBL">
-					<span>15 Oct, 8:56 <small class="transWord hidden-sm">2018</small></span>
-				</div>
-	
-			</div>
-		</div>
-		<div class="container marginTBL">
-			<form method="POST" action="requestService.html">
-				<h2>Your Review</h2>
-				<fieldset class="rating">
-    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-</fieldset>
-				<textarea rows="6" class="form-control" required></textarea>
-				<br><button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                <br><br>
-			</form>
-		</div>
-		<div class="container marginTBL" style="margin-bottom:30px;">
-			<h2>Notes</h2>
-			<blockquote style="font-size:13px;">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</blockquote>
-		</div>
+	<div class="col-md-8">
+              <!-- Form -->
+        <br>
+        <h2 style="color:black;" >Request Services</h2>
+              <form id="contactForm" class="contact-form" method="POST" action="#" data-toggle="validator">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group-addon" style="width: 2.6rem"> Service Title:</div>
+                          <input type="text" class="form-control" id="title" name="title" placeholder="Service Title" required data-error="Please Enter Service title">
+                          <div class="help-block with-errors"></div>
+                        </div>                    
+                      </div>
+                      <div class="col-md-6">                 
+                          <div class="form-group">
+                                    <label class="sr-only" for="password">Date</label>
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem color:#000">Date :</div>
+                                        <input type="date" name="date" class="form-control" id="date"
+                                               placeholder="date" required>
+                                    </div>
+                                </div>
+                          <div class="form-group">
+                                    <label class="sr-only" for="password">Time</label>
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem">Time :</div>
+                                        <input type="time" name="time" class="form-control" id="time"
+                                               placeholder="time" required>
+                                    </div>
+                                </div>
+                            <div class="form-group">
+                                     <div class="input-group-addon" style="width: 2.6rem">Job Type :</div>
+                        <select class="form-control">
+                            <option>Full Time</option>
+                            <option>Part Time</option>
+                          </select> 
+                                </div>
+                        
+                           <div class="form-group">
+                                    <label class="sr-only" for="email">Status</label>
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem">Service Type :</div>
+                                        <select class="form-control">
+                                            <option>1212 - Cooking</option>
+                                            <option>2626 - Cleaning</option>
+                                            <option>3131 - Driving</option>
+                                            <option>4242 - Nursing</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                        <div class="form-group"> 
+                          <textarea class="form-control" name="notes" id="notes" placeholder="Message" rows="7" data-error="Write your message" required></textarea>
+                          <div class="help-block with-errors"></div>
+                        </div>
+                          
+                         
+                      </div>
+                      <div class="col-md-12">
+                        <button type="submit" name="submit" id="submit" class="btn btn-common">Request</button>
+                        <div id="msgSubmit"  class="h3 text-center hidden"></div> 
+                        <div class="clearfix"></div>   
+                      </div>
+                    </div>
+                  </div>                     
+                </div> 
+              </form>
+            </div> 
 	</div>
+          </section>
 
-					
-
-				
-				</div>
-			</div>
-		</div>
-	</div>
-<br><br>
-                <div class="job-tag">
-                  
-                  </div>
-                
-        </section></section>
           <!-- Off Canvas Navigation -->
      	<!-- Footer Section Start -->
     <footer>
@@ -327,6 +345,6 @@
     <script type="text/javascript" src="assets/js/contact-form-script.js"></script>    
     <script type="text/javascript" src="assets/js/jquery.themepunch.revolution.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.themepunch.tools.min.js"></script>
-           </div>
+          </section></div></section>  </div></div>
   </body>
 </html>
